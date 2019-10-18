@@ -1,9 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { vuexfireMutations, firestoreAction } from 'vuexfire';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/analytics';
+import Vue from "vue";
+import Vuex from "vuex";
+import { vuexfireMutations, firestoreAction } from "vuexfire";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/analytics";
+import "firebase/auth";
 
 Vue.use(Vuex);
 
@@ -22,7 +23,7 @@ const db = firebase.initializeApp(config).firestore();
 firebase.analytics();
 
 export default new Vuex.Store({
-  // setup the reactive todos property
+  // setup the reactive posts property
   state: {
     user: {
       info: {},
@@ -55,8 +56,8 @@ export default new Vuex.Store({
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(rep => {
           console.log(rep.user);
-          commit('setUser', rep.user.uid);
-          commit('setStatus', 'success');
+          commit("setUser", rep.user.uid);
+          commit("setStatus", "success");
         })
         .catch(error => {
           console.log(error.code);
@@ -68,7 +69,7 @@ export default new Vuex.Store({
       // and adds `bindFirestoreRef` and `unbindFirestoreRef`
       // we return the promise returned by `bindFirestoreRef` that will
       // resolve once data is ready
-      return context.bindFirestoreRef('posts', db.collection('posts'));
+      return context.bindFirestoreRef("posts", db.collection("posts"));
     })
   }
 });
