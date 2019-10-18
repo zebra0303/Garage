@@ -3,4 +3,4 @@
   from = "/*"
   to = "/"
   status = 200
-#  force = true # Ensure that we always redirect
+  force = true # Ensure that we always redirect
