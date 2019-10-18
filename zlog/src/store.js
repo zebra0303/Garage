@@ -24,7 +24,7 @@ firebase.analytics();
 export default new Vuex.Store({
   // setup the reactive todos property
   state: {
-    user: { 
+    user: {
       info: {},
       status: null,
       error: null
@@ -33,33 +33,35 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setUser (state, payload) {
+    setUser(state, payload) {
       state.user = payload;
     },
-    removeUser (state) {
+    removeUser(state) {
       state.user = null;
     },
-    setStatus (state, payload) {
+    setStatus(state, payload) {
       state.status = payload;
     },
-    setError (state, payload) {
+    setError(state, payload) {
       state.error = payload;
     },
     ...vuexfireMutations
   },
 
   actions: {
-    signInAction ({commit}, payload) {
-      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-      .then((rep) => {
-        console.log(rep.user);
-        commit('setUser', rep.user.uid);
-        commit('setStatus', 'success');
-      })
-      .catch((error) => {
-        console.log(error.code)
-        console.log(error.message)
-      }); 
+    signInAction({ commit }, payload) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then(rep => {
+          console.log(rep.user);
+          commit('setUser', rep.user.uid);
+          commit('setStatus', 'success');
+        })
+        .catch(error => {
+          console.log(error.code);
+          console.log(error.message);
+        });
     },
     bindPostsRef: firestoreAction(context => {
       // context contains all original properties like commit, state, etc
