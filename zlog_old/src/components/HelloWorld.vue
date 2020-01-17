@@ -8,6 +8,13 @@
       <input v-model="password" type="password" />
       <div>
         <button @click="signUp()">가입하기</button>
+        <br />
+        <br />
+        <button @click="addPost()">데이타 추가</button>
+        <button @click="bindPosts()">데이타 Bind</button>
+      </div>
+      <div v-for="post in posts">
+        <div>{{post.title}}</div>
       </div>
     </div>
   </div>
@@ -21,6 +28,7 @@ export default {
   },
   data() {
     return {
+      posts: this.$store.state.posts,
       email: "",
       password: ""
     };
@@ -30,6 +38,25 @@ export default {
       this.$store.dispatch("signInAction", {
         email: this.email,
         password: this.password
+      });
+    },
+    addPost() {
+      this.$store.dispatch("addPostAction", {
+        title: "test title",
+        content: "test content"
+      });
+    },
+    bindPosts() {
+      console.log(this.$store.state.posts);
+      const _self = this;
+      this.$store.dispatch("bindPostsRef", {}).then(function(res) {
+        _self.posts = _self.$store.state.posts;
+        console.log(_self.$store.state.posts);
+        _self.$store.state.posts.push({
+          title: "from vue",
+          content: "helllo",
+          datetime: new Date()
+        });
       });
     }
   }

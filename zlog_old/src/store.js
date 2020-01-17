@@ -1,10 +1,10 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import { vuexfireMutations, firestoreAction } from "vuexfire";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/analytics";
-import "firebase/auth";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { vuexfireMutations, firestoreAction } from 'vuexfire';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/analytics';
+import 'firebase/auth';
 
 Vue.use(Vuex);
 
@@ -48,7 +48,6 @@ export default new Vuex.Store({
     },
     ...vuexfireMutations
   },
-
   actions: {
     signInAction({ commit }, payload) {
       firebase
@@ -56,8 +55,23 @@ export default new Vuex.Store({
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(rep => {
           console.log(rep.user);
-          commit("setUser", rep.user.uid);
-          commit("setStatus", "success");
+          commit('setUser', rep.user.uid);
+          commit('setStatus', 'success');
+        })
+        .catch(error => {
+          console.log(error.code);
+          console.log(error.message);
+        });
+    },
+    addPostAction({ commit }, payload) {
+      db.collection("posts")
+        .add({
+          title: payload.title,
+          content: payload.content,
+          datetime: new Date()
+        })
+        .then(rep => {
+          console.log(rep);
         })
         .catch(error => {
           console.log(error.code);
@@ -69,6 +83,7 @@ export default new Vuex.Store({
       // and adds `bindFirestoreRef` and `unbindFirestoreRef`
       // we return the promise returned by `bindFirestoreRef` that will
       // resolve once data is ready
+      console.log("bind!!!");
       return context.bindFirestoreRef("posts", db.collection("posts"));
     })
   }
