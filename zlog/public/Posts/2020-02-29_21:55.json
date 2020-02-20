@@ -5,5 +5,6 @@
     {"img": {"src": "./img/zebra.svg", "width": 200, "height": 200}},
     {"p": "This is my first blog article\nthis is multi line"},
     {"img": {"src": "./img/zebra.svg", "width": 200, "height": 200}}
-  ]
+  ],
+  "tags": ["blog", "second"]
 }
