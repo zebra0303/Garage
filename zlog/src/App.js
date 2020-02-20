@@ -1,20 +1,12 @@
-
-import React, { useEffect, useState } from 'react';
-import getAllProducts from './api/getAllProducts';
+import React from 'react';
+import Post from './Components/Post';
+import './App.scss';
+import listPosts from './JSON/index.json';
 
 function App() {
-
-  const [data, setData] = useState('')
-
-  useEffect(() => {
-    getAllProducts.then(data =>  setData(data))    
-  }, []);
-  
   return (
     <div className="App">
-      <pre>
-        {JSON.stringify(data, null, 1 )}
-      </pre>
+      {listPosts.map(pid=><Post key={pid} pid={pid} />)}
     </div>
   );
 }

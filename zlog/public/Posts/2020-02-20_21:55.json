@@ -1,0 +1,9 @@
+{
+  "title": "Hello my Zlog!",
+  "content": [
+    {"p": "나의 첫 블로그를 쓴다.\n\n:)"},
+    {"img": {"src": "./img/zebra.svg", "width": 200, "height": 200}},
+    {"p": "This is my first blog article\nthis is multi line"},
+    {"img": {"src": "./img/zebra.svg", "width": 200, "height": 200}}
+  ]
+}
